@@ -1,17 +1,17 @@
-import java.awt.BorderLayout; //กรอบ
-import java.awt.Color; //สี
-import java.awt.Dimension; //ปรับขนาดจอภาพ
-import java.awt.Font; //เลือกฟอนต์
-import java.awt.FontMetrics; //การแสดงข้อความ
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension; 
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics; 
 import java.awt.Graphics2D;  
 import java.awt.RenderingHints;  
 import java.awt.event.MouseAdapter; 
-import java.awt.event.MouseEvent; //จับตำแหน่งการคลิ๊กของเมาส์
+import java.awt.event.MouseEvent;
 import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities; //ใช้ในการอัพเดต
+import javax.swing.SwingUtilities;
 import java.awt.event.*;
 import java.text.*;
 public class FifteenPuzzel extends JPanel { 
@@ -31,21 +31,21 @@ public class FifteenPuzzel extends JPanel {
   static int minute, second;
   
   public static void main(String[] args) {
-     SwingUtilities.invokeLater(() -> { //ใช้อัพเดต
+     SwingUtilities.invokeLater(() -> { 
        JFrame frame = new JFrame();
        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        frame.setTitle("Fifteen Puzzel"); 
-       frame.setResizable(false); //ย่อหรือขยายหน้าจอถ้าเป็นfalseจะย่อหรือขยายไม่ได้
-       frame.add(new FifteenPuzzel(4, 550, 30), BorderLayout.CENTER); //เพิ่มตัวเกมเข้ามาในเมดตอทGameOfFifteen
-       frame.pack(); //เป็นการsetขนาดของ frame
-       frame.setLocationRelativeTo(null); //เซตค่าให้วินโดวอยู่ตรงกลางของหน้าจอ
-       frame.setVisible(true); //แสดงหน้าต่าง
-       final DecimalFormat dc = new DecimalFormat("00"); //ประกาศว่าตำแหน่งนาทีและวินาทีเป็นรูปแบบทศนิยม
+       frame.setResizable(false); 
+       frame.add(new FifteenPuzzel(4, 550, 30), BorderLayout.CENTER); 
+       frame.pack(); 
+       frame.setLocationRelativeTo(null); 
+       frame.setVisible(true); 
+       final DecimalFormat dc = new DecimalFormat("00"); 
        t = new javax.swing.Timer( 
-             1000, //กำหนดหน่วยเวลา 1 วินาที = 1000 มิลลิวินาที(Timer ทำงานทุกๆ1วินาที)
+             1000, 
              new ActionListener() {
                  public void actionPerformed(ActionEvent e) {
-                     frame.setTitle(dc.format(minute) + ":" + dc.format(second)); //แสดง string ที่เซ็ตค่าไว้ในตัวแปร dc
+                     frame.setTitle(dc.format(minute) + ":" + dc.format(second)); 
                      second++;
                      if (second >= 60) 
                      {
@@ -64,19 +64,19 @@ public class FifteenPuzzel extends JPanel {
     margin = mar;
     
     numberTiles = size * size - 1; 
-    tiles = new int[size * size]; //อาเรย์1มิติของตัวเลข1-15
+    tiles = new int[size * size]; 
     
-    gridSize = (dim - 2 * margin); //ไซส์ตาราง
-    tileSize = gridSize / size; //ไซส์กรอบแต่ละกรอบ
+    gridSize = (dim - 2 * margin); 
+    tileSize = gridSize / size; 
     
-    setPreferredSize(new Dimension(dimension, dimension + margin)); //set ขนาด window
+    setPreferredSize(new Dimension(dimension, dimension + margin)); 
     setBackground(Color.WHITE); 
     setForeground(FOREGROUND_COLOR);
-    setFont(new Font("SansSerif", Font.BOLD, 60)); //set font ของตัวเลขในแต่ละบล็อคตัวเลข
+    setFont(new Font("SansSerif", Font.BOLD, 60)); 
     
     gameOver = true;
     
-    addMouseListener(new MouseAdapter() //ตรวจจับการ click ของเมาส์ 
+    addMouseListener(new MouseAdapter()  
     {
       public void mousePressed(MouseEvent e) {
         if (gameOver) {
@@ -85,11 +85,11 @@ public class FifteenPuzzel extends JPanel {
           t.start();
         } else {
           t.start();
-          //หาตำแหน่งที่เมาส์คลิ๊ก
+          
           int ex = e.getX() - margin;
           int ey = e.getY() - margin;
           
-          //เช็คว่าตำแหน่งที่คลิ๊กอยู่บนตารางหรือไม่
+          
           if (ex < 0 || ex > gridSize  || ey < 0  || ey > gridSize)
             return;
          
@@ -103,11 +103,11 @@ public class FifteenPuzzel extends JPanel {
           
           int dir = 0;
           
-          //เพราะเป็นค่าตำแหน่งมีค่าเป็นบวก
+          
           if (c1 == c2  &&  Math.abs(r1 - r2) > 0)
-            dir = (r1 - r2) > 0 ? size : -size; //ขยับแกน_y
+            dir = (r1 - r2) > 0 ? size : -size; 
           else if (r1 == r2 && Math.abs(c1 - c2) > 0)
-            dir = (c1 - c2) > 0 ? 1 : -1; //ขยับแกน_x
+            dir = (c1 - c2) > 0 ? 1 : -1; 
             
           if (dir != 0) {
             do {
@@ -129,7 +129,7 @@ public class FifteenPuzzel extends JPanel {
     newGame();
   }
   
-  //เมื่อisSolvable == trueเริ่มเกมใหม่ 
+   
   private void newGame() {
     do {
       reset(); 
@@ -158,7 +158,7 @@ public class FifteenPuzzel extends JPanel {
     }
   }
   
-  //เช็คว่าแก้ได้หรือไม่
+  
   private boolean isSolvable() {
     int countInversions = 0;
     
@@ -172,7 +172,7 @@ public class FifteenPuzzel extends JPanel {
     return countInversions % 2 == 0;
   }
   
-  //เช็คว่าแก้เสร็จหรือยัง
+  
   private boolean isSolved() {
     if (tiles[tiles.length - 1] != 0) 
       return false;
@@ -189,24 +189,24 @@ public class FifteenPuzzel extends JPanel {
     for (int i = 0; i < tiles.length; i++) {      
       int r = i / size;
       int c = i % size;
-      //พิกัดของบล็อค
+      
       int x = margin + c * tileSize;
       int y = margin + r * tileSize;
       
       if(tiles[i] == 0) {
         if (gameOver) {
           g.setColor(FOREGROUND_COLOR);
-          drawCenteredString(g, "\u2713", x, y); //\u2764คือรูปหัวใจ\u2713จะเป็นรูปติ๊กถูก
+          drawCenteredString(g, "\u2713", x, y); 
         }
         
         continue;
       }
       
-      g.setColor(getForeground()); //set สีของแต่ละบล็อค
-      g.fillRoundRect(x, y, tileSize, tileSize, 55, 55); //ปรับความมนของกรอบบล็อค
-      g.setColor(Color.WHITE); //สีกรอบของแต่ละบล็อค
-      g.drawRoundRect(x, y, tileSize, tileSize, 55, 55); //ปรับความมนของพื้นบล็อค
-      g.setColor(Color.WHITE); //สีตัวเลข
+      g.setColor(getForeground()); 
+      g.fillRoundRect(x, y, tileSize, tileSize, 55, 55); 
+      g.setColor(Color.WHITE); 
+      g.drawRoundRect(x, y, tileSize, tileSize, 55, 55); 
+      g.setColor(Color.WHITE); 
       
       drawCenteredString(g, String.valueOf(tiles[i]), x , y); 
     }
@@ -232,7 +232,7 @@ public class FifteenPuzzel extends JPanel {
   
   protected void paintComponent(Graphics g) 
   {
-    super.paintComponent(g); //มีเพื่อความแม่นยำในการ paint
+    super.paintComponent(g); 
     Graphics2D g2D = (Graphics2D) g;
     g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     drawGrid(g2D);
