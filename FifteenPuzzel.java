@@ -79,6 +79,7 @@ public class FifteenPuzzel extends JPanel {
     addMouseListener(new MouseAdapter()  
     {
       public void mousePressed(MouseEvent e) {
+        /*This part is my responsibility.*/
         if (gameOver) {
           newGame();
           minute = 0;second = 0;
